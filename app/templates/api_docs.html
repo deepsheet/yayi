@@ -1,0 +1,427 @@
+{% extends "base.html" %}
+
+{% block title %}API文档 - LY牙助手{% endblock %}
+
+{% block styles %}
+<style>
+    .api-method {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+    .api-method.get {
+        background-color: #61affe;
+        color: white;
+    }
+    .api-method.post {
+        background-color: #49cc90;
+        color: white;
+    }
+    .api-method.put {
+        background-color: #fca130;
+        color: white;
+    }
+    .api-method.delete {
+        background-color: #f93e3e;
+        color: white;
+    }
+    .endpoint {
+        font-family: monospace;
+        padding: 4px 8px;
+        background-color: #f5f5f5;
+        border-radius: 4px;
+    }
+    .api-section {
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+    }
+    .api-description {
+        margin: 15px 0;
+    }
+    pre {
+        background-color: #f5f5f5;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+    }
+    .param-table {
+        margin-bottom: 20px;
+    }
+    .required {
+        color: #f93e3e;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">API分类</h5>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="#authentication" class="list-group-item list-group-item-action">认证 API</a>
+                <a href="#users" class="list-group-item list-group-item-action">用户 API</a>
+                <a href="#clients" class="list-group-item list-group-item-action">客户 API</a>
+                <a href="#consultants" class="list-group-item list-group-item-action">咨询师 API</a>
+                <a href="#stores" class="list-group-item list-group-item-action">门店 API</a>
+                <a href="#doctors" class="list-group-item list-group-item-action">医生 API</a>
+                <a href="#treatments" class="list-group-item list-group-item-action">治疗记录 API</a>
+                <a href="#messages" class="list-group-item list-group-item-action">消息 API</a>
+                <a href="#knowledge" class="list-group-item list-group-item-action">知识库 API</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <h1>LY牙助手 API 文档</h1>
+        <p class="lead">本文档提供了LY牙助手所有可用API的详细说明。</p>
+        
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> 所有API请求都需要在请求头中包含认证令牌，格式为：<code>Authorization: Bearer &lt;token&gt;</code>
+        </div>
+        
+        <section id="authentication" class="api-section">
+            <h2>认证 API</h2>
+            
+            <div class="card mb-4">
+                <div class="card-header">
+                    <span class="api-method post">POST</span>
+                    <span class="endpoint">/api/auth/register</span>
+                </div>
+                <div class="card-body">
+                    <h5>用户注册</h5>
+                    <div class="api-description">
+                        <p>创建新用户账户</p>
+                    </div>
+                    
+                    <h6>请求参数</h6>
+                    <table class="table param-table">
+                        <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>类型</th>
+                                <th>描述</th>
+                                <th>必填</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>username</td>
+                                <td>string</td>
+                                <td>用户名</td>
+                                <td><span class="required">是</span></td>
+                            </tr>
+                            <tr>
+                                <td>password</td>
+                                <td>string</td>
+                                <td>密码</td>
+                                <td><span class="required">是</span></td>
+                            </tr>
+                            <tr>
+                                <td>email</td>
+                                <td>string</td>
+                                <td>邮箱</td>
+                                <td>否</td>
+                            </tr>
+                            <tr>
+                                <td>phone</td>
+                                <td>string</td>
+                                <td>手机号</td>
+                                <td>否</td>
+                            </tr>
+                            <tr>
+                                <td>role</td>
+                                <td>string</td>
+                                <td>角色（默认为client）</td>
+                                <td>否</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h6>响应示例</h6>
+                    <pre>
+{
+  "message": "用户注册成功！",
+  "code": 201,
+  "data": {
+    "user_id": 1,
+    "username": "test_user"
+  }
+}
+                    </pre>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header">
+                    <span class="api-method post">POST</span>
+                    <span class="endpoint">/api/auth/login</span>
+                </div>
+                <div class="card-body">
+                    <h5>用户登录</h5>
+                    <div class="api-description">
+                        <p>获取认证令牌</p>
+                    </div>
+                    
+                    <h6>请求参数</h6>
+                    <table class="table param-table">
+                        <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>类型</th>
+                                <th>描述</th>
+                                <th>必填</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>identity</td>
+                                <td>string</td>
+                                <td>用户名/邮箱/手机号</td>
+                                <td><span class="required">是</span></td>
+                            </tr>
+                            <tr>
+                                <td>password</td>
+                                <td>string</td>
+                                <td>密码</td>
+                                <td><span class="required">是</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h6>响应示例</h6>
+                    <pre>
+{
+  "message": "登录成功！",
+  "code": 200,
+  "data": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "user": {
+      "id": 1,
+      "username": "test_user",
+      "email": "test@example.com",
+      "phone": "13800138000",
+      "role": "client",
+      "is_active": true,
+      "created_at": "2023-01-01T00:00:00"
+    },
+    "expires_at": "2023-01-02T00:00:00"
+  }
+}
+                    </pre>
+                </div>
+            </div>
+        </section>
+        
+        <section id="clients" class="api-section">
+            <h2>客户 API</h2>
+            
+            <div class="card mb-4">
+                <div class="card-header">
+                    <span class="api-method get">GET</span>
+                    <span class="endpoint">/api/clients</span>
+                </div>
+                <div class="card-body">
+                    <h5>获取客户列表</h5>
+                    <div class="api-description">
+                        <p>获取当前咨询师的客户列表或所有客户（管理员）</p>
+                    </div>
+                    
+                    <h6>查询参数</h6>
+                    <table class="table param-table">
+                        <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>类型</th>
+                                <th>描述</th>
+                                <th>必填</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>is_orphan</td>
+                                <td>boolean</td>
+                                <td>是否筛选孤儿客户</td>
+                                <td>否</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h6>响应示例</h6>
+                    <pre>
+{
+  "message": "获取客户列表成功",
+  "code": 200,
+  "data": [
+    {
+      "id": 1,
+      "user_id": 2,
+      "name": "张三",
+      "gender": "男",
+      "birth_date": "1990-01-01",
+      "address": "上海市浦东新区XX路XX号",
+      "contact_info": "13900139000",
+      "tags": "潜在客户,种植牙",
+      "is_orphan": false,
+      "last_contact": "2023-01-01T10:00:00",
+      "assigned_consultant_id": 1,
+      "created_at": "2023-01-01T00:00:00"
+    },
+    ...
+  ]
+}
+                    </pre>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header">
+                    <span class="api-method get">GET</span>
+                    <span class="endpoint">/api/clients/{client_id}</span>
+                </div>
+                <div class="card-body">
+                    <h5>获取客户详情</h5>
+                    <div class="api-description">
+                        <p>获取指定客户的详细信息</p>
+                    </div>
+                    
+                    <h6>路径参数</h6>
+                    <table class="table param-table">
+                        <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>类型</th>
+                                <th>描述</th>
+                                <th>必填</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>client_id</td>
+                                <td>integer</td>
+                                <td>客户ID</td>
+                                <td><span class="required">是</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h6>响应示例</h6>
+                    <pre>
+{
+  "message": "获取客户信息成功",
+  "code": 200,
+  "data": {
+    "id": 1,
+    "user_id": 2,
+    "name": "张三",
+    "gender": "男",
+    "birth_date": "1990-01-01",
+    "address": "上海市浦东新区XX路XX号",
+    "contact_info": "13900139000",
+    "tags": "潜在客户,种植牙",
+    "is_orphan": false,
+    "last_contact": "2023-01-01T10:00:00",
+    "assigned_consultant_id": 1,
+    "created_at": "2023-01-01T00:00:00"
+  }
+}
+                    </pre>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header">
+                    <span class="api-method post">POST</span>
+                    <span class="endpoint">/api/clients</span>
+                </div>
+                <div class="card-body">
+                    <h5>创建客户</h5>
+                    <div class="api-description">
+                        <p>创建新客户，如果手机号对应的用户不存在，会一并创建用户账号</p>
+                    </div>
+                    
+                    <h6>请求参数</h6>
+                    <table class="table param-table">
+                        <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>类型</th>
+                                <th>描述</th>
+                                <th>必填</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>name</td>
+                                <td>string</td>
+                                <td>客户姓名</td>
+                                <td><span class="required">是</span></td>
+                            </tr>
+                            <tr>
+                                <td>phone</td>
+                                <td>string</td>
+                                <td>手机号</td>
+                                <td><span class="required">是</span></td>
+                            </tr>
+                            <tr>
+                                <td>gender</td>
+                                <td>string</td>
+                                <td>性别</td>
+                                <td>否</td>
+                            </tr>
+                            <tr>
+                                <td>birth_date</td>
+                                <td>string</td>
+                                <td>出生日期，格式：YYYY-MM-DD</td>
+                                <td>否</td>
+                            </tr>
+                            <tr>
+                                <td>address</td>
+                                <td>string</td>
+                                <td>地址</td>
+                                <td>否</td>
+                            </tr>
+                            <tr>
+                                <td>assigned_consultant_id</td>
+                                <td>integer</td>
+                                <td>分配的咨询师ID（仅管理员可用）</td>
+                                <td>否</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h6>响应示例</h6>
+                    <pre>
+{
+  "message": "用户和客户资料创建成功",
+  "code": 201,
+  "data": {
+    "id": 1,
+    "user_id": 2,
+    "name": "张三",
+    "gender": "男",
+    "birth_date": "1990-01-01",
+    "address": "上海市浦东新区XX路XX号",
+    "contact_info": "13900139000",
+    "tags": null,
+    "is_orphan": false,
+    "last_contact": "2023-01-01T10:00:00",
+    "assigned_consultant_id": 1,
+    "created_at": "2023-01-01T00:00:00"
+  }
+}
+                    </pre>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 可以继续添加更多API文档 -->
+        
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+
+{% block title %}在线咨询 - LY牙助手{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-person-circle"></i> 个人中心
+                </h5>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="{{ url_for('client.index') }}" class="list-group-item list-group-item-action">
+                    <i class="bi bi-speedometer2 me-2"></i> 仪表盘
+                </a>
+                <a href="{{ url_for('client.profile') }}" class="list-group-item list-group-item-action">
+                    <i class="bi bi-person me-2"></i> 个人资料
+                </a>
+                <a href="{{ url_for('client.appointment_list') }}" class="list-group-item list-group-item-action">
+                    <i class="bi bi-calendar-check me-2"></i> 我的预约
+                </a>
+                <a href="{{ url_for('client.treatment_history') }}" class="list-group-item list-group-item-action">
+                    <i class="bi bi-journal-medical me-2"></i> 治疗记录
+                </a>
+                <a href="{{ url_for('client.messages') }}" class="list-group-item list-group-item-action">
+                    <i class="bi bi-envelope me-2"></i> 消息中心
+                </a>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-geo-alt"></i> 快速导航
+                </h5>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="{{ url_for('client.store_map') }}" class="list-group-item list-group-item-action">
+                    <i class="bi bi-map me-2"></i> 查找门店
+                </a>
+                <a href="{{ url_for('client.chat') }}" class="list-group-item list-group-item-action active">
+                    <i class="bi bi-chat-dots me-2"></i> 在线咨询
+                </a>
+                <a href="{{ url_for('client.new_appointment') }}" class="list-group-item list-group-item-action">
+                    <i class="bi bi-calendar-plus me-2"></i> 预约就诊
+                </a>
+            </div>
+        </div>
+        
+        {% if consultant %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-person-badge"></i> 我的咨询师
+                </h5>
+            </div>
+            <div class="card-body text-center">
+                <img src="{{ consultant.user.avatar or url_for('static', filename='images/avatar.png') }}" 
+                     class="rounded-circle mb-3" alt="咨询师头像" style="width: 100px; height: 100px;">
+                <h5>{{ consultant.user.username }}</h5>
+                <p class="mb-1">
+                    {% if consultant.type == 'fulltime' %}
+                    <span class="badge bg-warning">全职咨询师</span>
+                    {% else %}
+                    <span class="badge bg-info">兼职咨询师</span>
+                    {% endif %}
+                </p>
+                <p class="text-muted small mb-2">{{ consultant.specialties or '暂无专业领域信息' }}</p>
+                <div class="mb-2">
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <span>{{ consultant.rating }}/5.0</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-question-circle"></i> 常见问题
+                </h5>
+            </div>
+            <div class="list-group list-group-flush">
+                <button class="list-group-item list-group-item-action faq-btn">种植牙价格是多少?</button>
+                <button class="list-group-item list-group-item-action faq-btn">正畸需要多长时间?</button>
+                <button class="list-group-item list-group-item-action faq-btn">洗牙会伤害牙齿吗?</button>
+                <button class="list-group-item list-group-item-action faq-btn">拔牙后多久能恢复?</button>
+                <button class="list-group-item list-group-item-action faq-btn">美白牙齿效果能保持多久?</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-9">
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="bi bi-chat-dots"></i> 
+                    {% if consultant %}
+                    与 {{ consultant.user.username }} 的对话
+                    {% else %}
+                    在线咨询
+                    {% endif %}
+                </h5>
+                {% if not consultant %}
+                <div>
+                    <span class="badge bg-warning">您尚未被分配咨询师，正在与AI助手对话</span>
+                </div>
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <div id="chat-history" class="chat-container mb-3">
+                    <!-- 聊天记录将通过JavaScript加载 -->
+                    {% if not chat_history %}
+                    <div class="text-center py-5 text-muted">
+                        <i class="bi bi-chat-dots display-1"></i>
+                        <p class="mt-3">暂无聊天记录，发送消息开始对话吧！</p>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="input-group">
+                    <textarea id="message-input" class="form-control" placeholder="输入您的问题..." rows="2"></textarea>
+                    <button id="send-button" class="btn btn-primary">
+                        <i class="bi bi-send"></i> 发送
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="bi bi-info-circle"></i> 咨询提示</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="text-center mb-3">
+                            <i class="bi bi-clock fs-1 text-primary"></i>
+                            <h6 class="mt-2">咨询时间</h6>
+                            <p class="small text-muted">工作日: 9:00-18:00<br>节假日: 10:00-16:00</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center mb-3">
+                            <i class="bi bi-person-check fs-1 text-primary"></i>
+                            <h6 class="mt-2">预约须知</h6>
+                            <p class="small text-muted">请提前一天预约<br>可随时取消或改期</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center mb-3">
+                            <i class="bi bi-telephone fs-1 text-primary"></i>
+                            <h6 class="mt-2">紧急联系</h6>
+                            <p class="small text-muted">客服热线: 400-XXX-XXXX<br>工作时间: 8:00-22:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // 初始化聊天
+    document.addEventListener('DOMContentLoaded', function() {
+        // 加载聊天历史
+        const chatHistory = {{ chat_history|safe or '[]' }};
+        
+        const chatContainer = document.getElementById('chat-history');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        
+        // 渲染聊天记录
+        if (chatHistory && chatHistory.length > 0) {
+            chatContainer.innerHTML = '';
+            chatHistory.forEach(function(msg) {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `chat-message ${msg.is_self ? 'self' : 'other'}`;
+                
+                const msgContent = document.createElement('div');
+                msgContent.className = 'message-content';
+                msgContent.textContent = msg.content;
+                
+                const msgTime = document.createElement('small');
+                msgTime.className = 'text-muted d-block mt-1';
+                msgTime.textContent = msg.time;
+                
+                msgDiv.appendChild(msgContent);
+                msgDiv.appendChild(msgTime);
+                chatContainer.appendChild(msgDiv);
+            });
+            
+            // 滚动到底部
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        
+        // 发送消息
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+            
+            // 添加到聊天窗口
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'chat-message self';
+            
+            const msgContent = document.createElement('div');
+            msgContent.className = 'message-content';
+            msgContent.textContent = message;
+            
+            const now = new Date();
+            const msgTime = document.createElement('small');
+            msgTime.className = 'text-muted d-block mt-1';
+            msgTime.textContent = now.toLocaleString();
+            
+            msgDiv.appendChild(msgContent);
+            msgDiv.appendChild(msgTime);
+            chatContainer.appendChild(msgDiv);
+            
+            // 清空输入框
+            messageInput.value = '';
+            
+            // 滚动到底部
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            
+            // 请求AI回复
+            fetch('{{ url_for("client.ask_ai") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    question: message
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // 显示AI回复
+                    const replyDiv = document.createElement('div');
+                    replyDiv.className = 'chat-message other';
+                    
+                    const replyContent = document.createElement('div');
+                    replyContent.className = 'message-content';
+                    replyContent.textContent = data.answer;
+                    
+                    const now = new Date();
+                    const replyTime = document.createElement('small');
+                    replyTime.className = 'text-muted d-block mt-1';
+                    replyTime.textContent = now.toLocaleString();
+                    
+                    replyDiv.appendChild(replyContent);
+                    replyDiv.appendChild(replyTime);
+                    chatContainer.appendChild(replyDiv);
+                    
+                    // 滚动到底部
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('发送失败，请稍后重试');
+            });
+        }
+        
+        // 绑定发送按钮事件
+        sendButton.addEventListener('click', sendMessage);
+        
+        // 绑定Enter键事件
+        messageInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+        
+        // 绑定常见问题点击事件
+        document.querySelectorAll('.faq-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                messageInput.value = this.textContent;
+                sendMessage();
+            });
+        });
+    });
+</script>
+{% endblock %} 

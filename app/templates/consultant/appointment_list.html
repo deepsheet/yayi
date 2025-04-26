@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}预约管理{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">预约管理</h2>
+    
+    <!-- 搜索和筛选区域 -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="GET" class="row g-3">
+                <div class="col-md-3">
+                    <input type="date" class="form-control" name="date" value="{{ request.args.get('date', '') }}">
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" name="status">
+                        <option value="">所有状态</option>
+                        <option value="pending" {% if request.args.get('status') == 'pending' %}selected{% endif %}>待确认</option>
+                        <option value="confirmed" {% if request.args.get('status') == 'confirmed' %}selected{% endif %}>已确认</option>
+                        <option value="completed" {% if request.args.get('status') == 'completed' %}selected{% endif %}>已完成</option>
+                        <option value="cancelled" {% if request.args.get('status') == 'cancelled' %}selected{% endif %}>已取消</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">搜索</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 预约列表 -->
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>预约时间</th>
+                            <th>客户姓名</th>
+                            <th>服务项目</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for appointment in appointments %}
+                        <tr>
+                            <td>{{ appointment.appointment_time.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td>{{ appointment.client.name }}</td>
+                            <td>{{ appointment.service.name }}</td>
+                            <td>
+                                <span class="badge {% if appointment.status == 'confirmed' %}bg-success{% elif appointment.status == 'pending' %}bg-warning{% elif appointment.status == 'completed' %}bg-info{% else %}bg-danger{% endif %}">
+                                    {{ {
+                                        'pending': '待确认',
+                                        'confirmed': '已确认',
+                                        'completed': '已完成',
+                                        'cancelled': '已取消'
+                                    }[appointment.status] }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="{{ url_for('consultant.view_appointment', appointment_id=appointment.id) }}" class="btn btn-sm btn-info">查看</a>
+                                    {% if appointment.status == 'pending' %}
+                                    <button type="button" class="btn btn-sm btn-success" onclick="updateAppointmentStatus({{ appointment.id }}, 'confirmed')">确认</button>
+                                    <button type="button" class="btn btn-sm btn-danger" onclick="updateAppointmentStatus({{ appointment.id }}, 'cancelled')">取消</button>
+                                    {% elif appointment.status == 'confirmed' %}
+                                    <button type="button" class="btn btn-sm btn-primary" onclick="updateAppointmentStatus({{ appointment.id }}, 'completed')">完成</button>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center">暂无预约数据</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+function updateAppointmentStatus(appointmentId, status) {
+    if (confirm('确定要更新预约状态吗？')) {
+        fetch(`/consultant/appointments/${appointmentId}/status`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ status: status })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('更新失败：' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('更新失败，请稍后重试');
+        });
+    }
+}
+</script>
+{% endblock %}
+{% endblock %} 

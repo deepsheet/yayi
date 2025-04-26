@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}我的主页 - LY牙助手{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">个人信息</h5>
+                    {% if client %}
+                    <p><strong>姓名：</strong>{{ client.name }}</p>
+                    <p><strong>性别：</strong>{{ client.gender }}</p>
+                    <p><strong>出生日期：</strong>{{ client.birth_date }}</p>
+                    <p><strong>地址：</strong>{{ client.address }}</p>
+                    <p><strong>联系方式：</strong>{{ client.contact_info }}</p>
+                    {% else %}
+                    <p>暂无个人信息</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">治疗记录</h5>
+                    {% if treatments %}
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>治疗类型</th>
+                                    <th>治疗日期</th>
+                                    <th>状态</th>
+                                    <th>费用</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for treatment in treatments %}
+                                <tr>
+                                    <td>{{ treatment.type }}</td>
+                                    <td>{{ treatment.appointment_date.strftime('%Y-%m-%d %H:%M') }}</td>
+                                    <td>{{ treatment.status }}</td>
+                                    <td>¥{{ treatment.fee }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <p>暂无治疗记录</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

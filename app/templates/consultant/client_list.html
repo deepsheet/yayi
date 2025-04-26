@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}客户管理{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">客户管理</h2>
+    
+    <!-- 搜索和筛选区域 -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="GET" class="row g-3">
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="search" placeholder="搜索客户姓名或手机号" value="{{ request.args.get('search', '') }}">
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" name="status">
+                        <option value="">所有状态</option>
+                        <option value="active" {% if request.args.get('status') == 'active' %}selected{% endif %}>活跃</option>
+                        <option value="inactive" {% if request.args.get('status') == 'inactive' %}selected{% endif %}>非活跃</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">搜索</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 客户列表 -->
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>客户姓名</th>
+                            <th>手机号</th>
+                            <th>状态</th>
+                            <th>最近预约</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for client in clients %}
+                        <tr>
+                            <td>{{ client.name }}</td>
+                            <td>{{ client.contact_info }}</td>
+                            <td>
+                                <span class="badge {% if client.status == 'active' %}bg-success{% else %}bg-secondary{% endif %}">
+                                    {{ '活跃' if client.status == 'active' else '非活跃' }}
+                                </span>
+                            </td>
+                            <td>{{ client.last_appointment_date|default('无', true) }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="{{ url_for('consultant.view_client', client_id=client.id) }}" class="btn btn-sm btn-info">查看</a>
+                                    <a href="{{ url_for('consultant.edit_client', client_id=client.id) }}" class="btn btn-sm btn-warning">编辑</a>
+                                    <button type="button" class="btn btn-sm btn-danger" onclick="deleteClient({{ client.id }})">删除</button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center">暂无客户数据</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+function deleteClient(clientId) {
+    if (confirm('确定要删除这个客户吗？此操作不可恢复。')) {
+        fetch(`/consultant/clients/${clientId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('删除失败：' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('删除失败，请稍后重试');
+        });
+    }
+}
+</script>
+{% endblock %}
+{% endblock %} 

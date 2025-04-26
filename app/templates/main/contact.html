@@ -1,0 +1,262 @@
+{% extends "base.html" %}
+
+{% block title %}联系我们 - LY牙助手{% endblock %}
+
+{% block content %}
+<!-- 页面头部 -->
+<section class="bg-primary py-5 text-white text-center">
+  <div class="container py-4">
+    <h1 class="display-4 fw-bold mb-3">联系我们</h1>
+    <p class="lead fs-4 mb-0">我们随时准备为您提供帮助和支持</p>
+  </div>
+</section>
+
+<!-- 联系信息与表单 -->
+<section class="py-5">
+  <div class="container py-4">
+    <div class="row g-5">
+      <!-- 联系信息 -->
+      <div class="col-lg-5">
+        <h2 class="display-6 fw-bold mb-4">联系方式</h2>
+        <p class="lead mb-5">无论您有任何问题、建议或合作意向，我们都期待与您沟通。</p>
+        
+        <div class="d-flex mb-4">
+          <div class="me-3">
+            <div class="rounded-circle bg-primary p-3 d-inline-flex">
+              <i class="bi bi-geo-alt fs-3 text-white"></i>
+            </div>
+          </div>
+          <div>
+            <h5 class="mb-2">总部地址</h5>
+            <p class="mb-0">中国上海市浦东新区张江高科技园区科苑路88号</p>
+          </div>
+        </div>
+        
+        <div class="d-flex mb-4">
+          <div class="me-3">
+            <div class="rounded-circle bg-primary p-3 d-inline-flex">
+              <i class="bi bi-telephone fs-3 text-white"></i>
+            </div>
+          </div>
+          <div>
+            <h5 class="mb-2">联系电话</h5>
+            <p class="mb-0">400-888-9999</p>
+            <p class="mb-0">021-58885888</p>
+          </div>
+        </div>
+        
+        <div class="d-flex mb-4">
+          <div class="me-3">
+            <div class="rounded-circle bg-primary p-3 d-inline-flex">
+              <i class="bi bi-envelope fs-3 text-white"></i>
+            </div>
+          </div>
+          <div>
+            <h5 class="mb-2">电子邮箱</h5>
+            <p class="mb-0">info@lydental.com</p>
+            <p class="mb-0">support@lydental.com</p>
+          </div>
+        </div>
+        
+        <div class="d-flex mb-5">
+          <div class="me-3">
+            <div class="rounded-circle bg-primary p-3 d-inline-flex">
+              <i class="bi bi-clock fs-3 text-white"></i>
+            </div>
+          </div>
+          <div>
+            <h5 class="mb-2">工作时间</h5>
+            <p class="mb-0">周一至周五: 9:00 - 18:00</p>
+            <p class="mb-0">周六: 9:00 - 16:00</p>
+          </div>
+        </div>
+        
+        <h5 class="mb-3">关注我们</h5>
+        <div class="d-flex gap-3">
+          <a href="#" class="btn btn-outline-primary rounded-circle p-2">
+            <i class="bi bi-wechat fs-4"></i>
+          </a>
+          <a href="#" class="btn btn-outline-primary rounded-circle p-2">
+            <i class="bi bi-linkedin fs-4"></i>
+          </a>
+          <a href="#" class="btn btn-outline-primary rounded-circle p-2">
+            <i class="bi bi-twitter-x fs-4"></i>
+          </a>
+          <a href="#" class="btn btn-outline-primary rounded-circle p-2">
+            <i class="bi bi-instagram fs-4"></i>
+          </a>
+        </div>
+      </div>
+      
+      <!-- 联系表单 -->
+      <div class="col-lg-7">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4 p-lg-5">
+            <h2 class="h3 fw-bold mb-4">给我们留言</h2>
+            <form>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="name" class="form-label">姓名</label>
+                  <input type="text" class="form-control" id="name" placeholder="请输入您的姓名" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="company" class="form-label">公司/诊所名称</label>
+                  <input type="text" class="form-control" id="company" placeholder="请输入您的公司/诊所名称">
+                </div>
+                <div class="col-md-6">
+                  <label for="email" class="form-label">电子邮箱</label>
+                  <input type="email" class="form-control" id="email" placeholder="请输入您的电子邮箱" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="phone" class="form-label">联系电话</label>
+                  <input type="tel" class="form-control" id="phone" placeholder="请输入您的联系电话">
+                </div>
+                <div class="col-12">
+                  <label for="subject" class="form-label">主题</label>
+                  <select class="form-select" id="subject" required>
+                    <option value="" selected disabled>请选择联系主题</option>
+                    <option value="sales">产品咨询</option>
+                    <option value="support">技术支持</option>
+                    <option value="demo">预约演示</option>
+                    <option value="cooperation">合作洽谈</option>
+                    <option value="other">其他问题</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label for="message" class="form-label">留言内容</label>
+                  <textarea class="form-control" id="message" rows="5" placeholder="请输入您的留言内容" required></textarea>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary btn-lg">提交留言</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 地图部分 -->
+<section class="py-5 bg-light">
+  <div class="container py-4">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <h2 class="display-5 fw-bold mb-3">我们的位置</h2>
+        <p class="lead">欢迎您来访我们的办公地点</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-0">
+            <div id="map-container" class="ratio ratio-21x9">
+              <!-- 地图将通过JavaScript动态加载 -->
+              <div class="d-flex align-items-center justify-content-center bg-light">
+                <div class="text-center p-4">
+                  <div class="spinner-border text-primary mb-3" role="status">
+                    <span class="visually-hidden">加载中...</span>
+                  </div>
+                  <p class="mb-0">地图加载中...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 常见问题 -->
+<section class="py-5">
+  <div class="container py-4">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <h2 class="display-5 fw-bold mb-3">常见问题</h2>
+        <p class="lead">您可能想了解的问题</p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="accordion" id="faqAccordion">
+          <div class="accordion-item border-0 mb-3 shadow-sm">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                如何开始使用LY牙助手系统？
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>开始使用LY牙助手系统非常简单。首先，您可以通过"联系我们"页面填写表单或直接致电我们的销售团队。我们会安排专业顾问与您沟通需求，为您提供定制化的解决方案。确认后，我们会为您设置系统并提供全面的培训和支持，确保您能够顺利使用我们的系统。</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="accordion-item border-0 mb-3 shadow-sm">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                LY牙助手系统是否提供定制开发服务？
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>是的，我们提供定制开发服务。我们理解每家牙科诊所都有其独特的需求和工作流程。因此，除了标准功能外，我们还可以根据您的特定需求，为您定制开发额外的功能模块，以满足您的业务需要。请联系我们的客户服务团队了解更多定制选项。</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="accordion-item border-0 mb-3 shadow-sm">
+            <h2 class="accordion-header" id="headingThree">
+              <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                如何获取技术支持？
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>我们提供多种渠道的技术支持。您可以通过系统内的帮助中心获取基本指导，或者通过电话、电子邮件或在线聊天联系我们的客户支持团队。对于合作伙伴，我们还提供专属客户经理服务，确保您的问题能够得到及时解决。我们的工作时间是周一至周五的9:00-18:00，周六的9:00-16:00。</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="accordion-item border-0 mb-3 shadow-sm">
+            <h2 class="accordion-header" id="headingFour">
+              <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                LY牙助手系统的数据安全如何保障？
+              </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>数据安全是我们的首要任务。LY牙助手系统采用银行级加密技术保护所有数据传输，并实施严格的访问控制和权限管理。我们的服务器位于安全可靠的云计算平台，定期进行安全审计和漏洞扫描。此外，我们还提供定期自动备份服务，确保您的数据不会因意外情况而丢失。我们完全遵守相关的数据保护法规，保障您和您客户的数据安全。</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="accordion-item border-0 shadow-sm">
+            <h2 class="accordion-header" id="headingFive">
+              <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                如何预约系统演示？
+              </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>您可以通过本页面的联系表单选择"预约演示"选项，或直接致电我们的销售团队（400-888-9999）预约系统演示。在确认预约后，我们的产品专家会在约定时间通过线上会议或实地拜访的方式，为您详细介绍LY牙助手系统的各项功能和使用方法，并解答您的任何疑问。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA部分 -->
+<section class="py-5 bg-primary text-white">
+  <div class="container py-4 text-center">
+    <h2 class="display-5 fw-bold mb-4">准备好开始您的数字化转型了吗？</h2>
+    <p class="lead fs-4 mb-5">联系我们，了解LY牙助手如何提升您的牙科诊所管理效率</p>
+    <a href="#" class="btn btn-light btn-lg px-5 py-3 rounded-pill">立即咨询</a>
+  </div>
+</section>
+{% endblock %} 

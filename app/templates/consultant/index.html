@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block title %}咨询师仪表盘 - LY牙助手{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-person-circle"></i> 个人中心
+                    </h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="{{ url_for('consultant.index') }}" class="list-group-item list-group-item-action active">
+                        <i class="bi bi-speedometer2 me-2"></i> 仪表盘
+                    </a>
+                    <a href="{{ url_for('consultant.client_list') }}" class="list-group-item list-group-item-action">
+                        <i class="bi bi-people me-2"></i> 客户管理
+                    </a>
+                    <a href="{{ url_for('consultant.appointment_list') }}" class="list-group-item list-group-item-action">
+                        <i class="bi bi-calendar-check me-2"></i> 预约管理
+                    </a>
+                    <a href="{{ url_for('consultant.messages') }}" class="list-group-item list-group-item-action">
+                        <i class="bi bi-envelope me-2"></i> 消息中心
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-9">
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="card dashboard-card info h-100">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                        客户数量
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        {{ clients|length }}
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="bi bi-people-fill fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card dashboard-card success h-100">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                        未读消息
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        {{ unread_messages }}
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="bi bi-envelope-fill fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card dashboard-card warning h-100">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                        待处理预约
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        {{ recent_appointments|length }}
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="bi bi-calendar-check-fill fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">最近预约</h5>
+                </div>
+                <div class="card-body">
+                    {% if recent_appointments %}
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>客户</th>
+                                    <th>治疗类型</th>
+                                    <th>预约时间</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for appointment in recent_appointments %}
+                                <tr>
+                                    <td>{{ appointment.client.name }}</td>
+                                    <td>{{ appointment.type }}</td>
+                                    <td>{{ appointment.appointment_date.strftime('%Y-%m-%d %H:%M') }}</td>
+                                    <td>{{ appointment.status }}</td>
+                                    <td>
+                                        <a href="{{ url_for('consultant.client_detail', client_id=appointment.client.id) }}" class="btn btn-sm btn-primary">查看详情</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <p class="text-center">暂无预约</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">我的客户</h5>
+                </div>
+                <div class="card-body">
+                    {% if clients %}
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>姓名</th>
+                                    <th>联系方式</th>
+                                    <th>标签</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for client in clients %}
+                                <tr>
+                                    <td>{{ client.name }}</td>
+                                    <td>{{ client.contact_info }}</td>
+                                    <td>{{ client.tags }}</td>
+                                    <td>
+                                        <a href="{{ url_for('consultant.client_detail', client_id=client.id) }}" class="btn btn-sm btn-primary">查看详情</a>
+                                        <a href="{{ url_for('consultant.chat', client_id=client.id) }}" class="btn btn-sm btn-success">在线沟通</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <p class="text-center">暂无客户</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

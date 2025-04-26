@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}编辑个人资料{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">编辑个人资料</h2>
+    
+    <div class="card">
+        <div class="card-body">
+            <form method="POST">
+                <!-- 基本信息 -->
+                <div class="mb-4">
+                    <h5>基本信息</h5>
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label for="bio" class="form-label">个人简介</label>
+                            <textarea class="form-control" id="bio" name="bio" rows="3">{{ consultant.bio }}</textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="specialties" class="form-label">专长领域</label>
+                            <input type="text" class="form-control" id="specialties" name="specialties" value="{{ consultant.specialties }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="working_hours" class="form-label">工作时间</label>
+                            <input type="text" class="form-control" id="working_hours" name="working_hours" value="{{ consultant.working_hours }}">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 联系方式 -->
+                <div class="mb-4">
+                    <h5>联系方式</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="contact_info" class="form-label">联系电话</label>
+                            <input type="text" class="form-control" id="contact_info" name="contact_info" value="{{ consultant.contact_info }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="wechat" class="form-label">微信号</label>
+                            <input type="text" class="form-control" id="wechat" name="wechat" value="{{ consultant.wechat }}">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 其他信息 -->
+                <div class="mb-4">
+                    <h5>其他信息</h5>
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label for="education" class="form-label">教育背景</label>
+                            <textarea class="form-control" id="education" name="education" rows="2">{{ consultant.education }}</textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="certifications" class="form-label">专业证书</label>
+                            <textarea class="form-control" id="certifications" name="certifications" rows="2">{{ consultant.certifications }}</textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="experience" class="form-label">工作经验</label>
+                            <textarea class="form-control" id="experience" name="experience" rows="3">{{ consultant.experience }}</textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">保存更改</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %} 

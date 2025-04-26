@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}注册 - LY牙助手{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-logo">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="LY牙助手" height="60">
+        <h2 class="mt-3">创建账户</h2>
+    </div>
+    
+    <form method="POST" action="{{ url_for('auth.register') }}">
+        <div class="mb-3">
+            <label for="username" class="form-label">用户名</label>
+            <input type="text" class="form-control" id="username" name="username" required autofocus>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">邮箱</label>
+            <input type="email" class="form-control" id="email" name="email">
+            <div class="form-text">邮箱用于密码找回和重要通知</div>
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">手机号</label>
+            <input type="tel" class="form-control" id="phone" name="phone">
+            <div class="form-text">手机号用于账户验证和重要通知</div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">密码</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+            <div class="form-text">密码长度至少8位，包含字母和数字</div>
+        </div>
+        <div class="mb-3">
+            <label for="confirm_password" class="form-label">确认密码</label>
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="agreement" name="agreement" required>
+            <label class="form-check-label" for="agreement">
+                我已阅读并同意<a href="#" target="_blank">服务条款</a>和<a href="#" target="_blank">隐私政策</a>
+            </label>
+        </div>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">注册</button>
+        </div>
+    </form>
+    
+    <div class="mt-3 text-center">
+        <p>
+            已有账号? <a href="{{ url_for('auth.login') }}">立即登录</a>
+        </p>
+    </div>
+</div>
+{% endblock %} 

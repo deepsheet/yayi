@@ -1,0 +1,340 @@
+{% extends "base.html" %}
+
+{% block title %}首页 - LY牙助手{% endblock %}
+
+{% block content %}
+<!-- 现代化英雄区域 -->
+<section class="hero-section position-relative overflow-hidden">
+  <div class="container py-5">
+    <div class="row align-items-center min-vh-75">
+      <div class="col-lg-6 mb-5 mb-lg-0">
+        <h1 class="display-3 fw-bold text-primary mb-3">LY牙助手</h1>
+        <p class="lead fs-4 mb-4">专业牙科诊所数字化管理系统，提升客户体验与经营效率的完美解决方案</p>
+        <p class="fs-5 text-secondary mb-5">通过动态客户绑定机制减少资源浪费，提升客户存留、转化、激活、复购和客户终身价值。</p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="#" class="btn btn-primary btn-lg">立即体验</a>
+          <a href="{{ url_for('main.services') }}" class="btn btn-outline-primary btn-lg">了解更多</a>
+        </div>
+      </div>
+      <div class="col-lg-6 text-center">
+        <img src="https://img.freepik.com/free-vector/dentist-concept-illustration_114360-7383.jpg" alt="牙科助手" class="img-fluid rounded-4 shadow-lg" style="max-height: 500px;">
+      </div>
+    </div>
+  </div>
+  <div class="position-absolute top-0 end-0 w-50 h-100 bg-light opacity-50 d-none d-lg-block" style="z-index: -1; clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);"></div>
+</section>
+
+<!-- 数据统计部分 -->
+<section class="bg-gradient-primary-to-secondary text-white py-5">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-3 mb-4 mb-md-0">
+        <div class="d-flex flex-column align-items-center">
+          <h2 class="display-4 fw-bold mb-0">3000+</h2>
+          <p class="mb-0">知识库问答</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4 mb-md-0">
+        <div class="d-flex flex-column align-items-center">
+          <h2 class="display-4 fw-bold mb-0">98%</h2>
+          <p class="mb-0">客户满意度</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4 mb-md-0">
+        <div class="d-flex flex-column align-items-center">
+          <h2 class="display-4 fw-bold mb-0">150+</h2>
+          <p class="mb-0">合作诊所</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="d-flex flex-column align-items-center">
+          <h2 class="display-4 fw-bold mb-0">25%</h2>
+          <p class="mb-0">客户转化率提升</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 服务特点部分 -->
+<section class="py-5 bg-light">
+  <div class="container py-4">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <h2 class="display-5 fw-bold mb-3">我们的服务</h2>
+        <p class="lead">专业的牙科诊所管理解决方案，让您的业务更上一层楼</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100 hover-lift">
+          <div class="card-body p-4 text-center">
+            <div class="rounded-circle bg-primary bg-opacity-10 p-3 d-inline-flex mb-4">
+              <i class="bi bi-shop fs-2 text-primary"></i>
+            </div>
+            <h4 class="card-title mb-3">门店管理</h4>
+            <p class="card-text">为牙科诊所门店提供线上新客户拓展，增加门店引流到店，实现客户管理、营销自动化与跨端协作。</p>
+          </div>
+          <div class="card-footer bg-transparent border-0 pt-0 pb-4 text-center">
+            <a href="#" class="btn btn-sm btn-outline-primary">了解详情</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100 hover-lift">
+          <div class="card-body p-4 text-center">
+            <div class="rounded-circle bg-primary bg-opacity-10 p-3 d-inline-flex mb-4">
+              <i class="bi bi-people fs-2 text-primary"></i>
+            </div>
+            <h4 class="card-title mb-3">咨询师管理</h4>
+            <p class="card-text">为咨询师提供客户管理、沟通、智能化营销工具，提升销售业绩和奖励发放及时性。</p>
+          </div>
+          <div class="card-footer bg-transparent border-0 pt-0 pb-4 text-center">
+            <a href="#" class="btn btn-sm btn-outline-primary">了解详情</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100 hover-lift">
+          <div class="card-body p-4 text-center">
+            <div class="rounded-circle bg-primary bg-opacity-10 p-3 d-inline-flex mb-4">
+              <i class="bi bi-person-vcard fs-2 text-primary"></i>
+            </div>
+            <h4 class="card-title mb-3">客户服务</h4>
+            <p class="card-text">提供地图选择离家最近的几家牙科诊所和医生、咨询师介绍，优化客户体验。</p>
+          </div>
+          <div class="card-footer bg-transparent border-0 pt-0 pb-4 text-center">
+            <a href="#" class="btn btn-sm btn-outline-primary">了解详情</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 核心功能部分 -->
+<section class="py-5">
+  <div class="container py-4">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <h2 class="display-5 fw-bold mb-3">核心功能</h2>
+        <p class="lead">助力牙科诊所实现数字化转型的强大工具</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-3 col-md-6">
+        <div class="d-flex">
+          <div class="me-4">
+            <div class="rounded-circle bg-primary p-3 d-inline-flex">
+              <i class="bi bi-database text-white"></i>
+            </div>
+          </div>
+          <div>
+            <h5 class="mb-3">客户管理</h5>
+            <p class="text-muted">查看客户基础信息、历史沟通记录、诊疗记录，集成财务系统。</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="d-flex">
+          <div class="me-4">
+            <div class="rounded-circle bg-primary p-3 d-inline-flex">
+              <i class="bi bi-link text-white"></i>
+            </div>
+          </div>
+          <div>
+            <h5 class="mb-3">咨询师绑定</h5>
+            <p class="text-muted">客户默认绑定唯一咨询师，30天无联系自动标记为"孤儿客户"。</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="d-flex">
+          <div class="me-4">
+            <div class="rounded-circle bg-primary p-3 d-inline-flex">
+              <i class="bi bi-book text-white"></i>
+            </div>
+          </div>
+          <div>
+            <h5 class="mb-3">知识库管理</h5>
+            <p class="text-muted">结构化存储3000+牙科问答知识，动态学习机制自动收录优质对话。</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="d-flex">
+          <div class="me-4">
+            <div class="rounded-circle bg-primary p-3 d-inline-flex">
+              <i class="bi bi-robot text-white"></i>
+            </div>
+          </div>
+          <div>
+            <h5 class="mb-3">AI辅助工作台</h5>
+            <p class="text-muted">会话摘要生成、智能跟单提醒、客户画像分析、营销自动化引擎。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 推荐门店部分 -->
+<section class="py-5 bg-light">
+  <div class="container py-4">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <h2 class="display-5 fw-bold mb-3">推荐门店</h2>
+        <p class="lead">优质牙科诊所，提供专业服务</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      {% for store in featured_stores %}
+      <div class="col-md-6 col-lg-3">
+        <div class="card border-0 shadow-sm h-100 hover-lift">
+          <div class="card-body">
+            <h5 class="card-title fw-bold">{{ store.name }}</h5>
+            <p class="card-text text-muted small mb-2"><i class="bi bi-geo-alt me-1"></i>{{ store.address }}</p>
+            <p class="card-text text-muted small mb-3"><i class="bi bi-telephone me-1"></i>{{ store.contact }}</p>
+            <div class="d-flex justify-content-end">
+              <a href="{{ url_for('client.store_detail', store_id=store.id) }}" class="btn btn-sm btn-outline-primary">查看详情</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- 推荐医生部分 -->
+<section class="py-5">
+  <div class="container py-4">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <h2 class="display-5 fw-bold mb-3">推荐医生</h2>
+        <p class="lead">专业牙科医师，为您提供优质服务</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      {% for doctor in featured_doctors %}
+      <div class="col-md-6 col-lg-3">
+        <div class="card border-0 shadow-sm h-100 hover-lift">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+              <div class="rounded-circle bg-light p-2 me-3">
+                <i class="bi bi-person-circle fs-3"></i>
+              </div>
+              <div>
+                <h5 class="card-title mb-0 fw-bold">{{ doctor.name }}</h5>
+                <p class="card-text text-muted small mb-0">{{ doctor.title }}</p>
+              </div>
+            </div>
+            <p class="card-text text-muted small mb-2"><i class="bi bi-clipboard-plus me-1"></i>{{ doctor.specialty }}</p>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <div>
+                <span class="badge bg-warning text-dark">
+                  <i class="bi bi-star-fill me-1"></i>{{ doctor.rating|round(1) }}
+                </span>
+              </div>
+              <a href="{{ url_for('client.doctor_detail', doctor_id=doctor.id) }}" class="btn btn-sm btn-outline-primary">查看详情</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- 咨询师招募部分 -->
+<section class="py-5 bg-primary text-white">
+  <div class="container py-4">
+    <div class="row align-items-center">
+      <div class="col-lg-7 mb-4 mb-lg-0">
+        <h2 class="display-5 fw-bold mb-3">成为咨询师</h2>
+        <p class="lead fs-4 mb-4">我们欢迎专业的牙科咨询师加入我们的平台，成为兼职咨询师，获取额外收入。</p>
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <div class="d-flex mb-3">
+              <div class="me-3">
+                <i class="bi bi-check-circle-fill fs-4 text-warning"></i>
+              </div>
+              <div>
+                <h5 class="mb-1">灵活的工作时间</h5>
+                <p class="mb-0 small">根据您的时间安排自由工作</p>
+              </div>
+            </div>
+            <div class="d-flex mb-3">
+              <div class="me-3">
+                <i class="bi bi-check-circle-fill fs-4 text-warning"></i>
+              </div>
+              <div>
+                <h5 class="mb-1">智能化营销工具</h5>
+                <p class="mb-0 small">提高您的客户转化率</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="d-flex mb-3">
+              <div class="me-3">
+                <i class="bi bi-check-circle-fill fs-4 text-warning"></i>
+              </div>
+              <div>
+                <h5 class="mb-1">客户消费提成</h5>
+                <p class="mb-0 small">获得可观的额外收入</p>
+              </div>
+            </div>
+            <div class="d-flex mb-3">
+              <div class="me-3">
+                <i class="bi bi-check-circle-fill fs-4 text-warning"></i>
+              </div>
+              <div>
+                <h5 class="mb-1">专业资源支持</h5>
+                <p class="mb-0 small">随时获取专业知识与培训</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="btn btn-warning btn-lg">立即申请</a>
+      </div>
+      <div class="col-lg-5 text-center">
+        <img src="https://img.freepik.com/free-vector/dental-clinic-concept-illustration_114360-8906.jpg" alt="成为咨询师" class="img-fluid rounded-4 shadow-lg" style="max-height: 400px;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 底部CTA部分 -->
+<section class="py-5">
+  <div class="container py-4">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <h2 class="display-5 fw-bold mb-3">准备好提升您的牙科诊所了吗？</h2>
+        <p class="lead mb-5">加入LY牙助手，开启数字化转型之旅</p>
+        <div class="d-flex justify-content-center gap-3">
+          <a href="#" class="btn btn-primary btn-lg px-4">免费试用</a>
+          <a href="{{ url_for('main.services') }}" class="btn btn-outline-secondary btn-lg px-4">联系我们</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bg-gradient-primary-to-secondary {
+    background: linear-gradient(45deg, var(--bs-primary) 0%, #4361ee 100%);
+  }
+  
+  .hover-lift {
+    transition: transform 0.3s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-10px);
+  }
+  
+  .min-vh-75 {
+    min-height: 75vh;
+  }
+</style>
+{% endblock %} 

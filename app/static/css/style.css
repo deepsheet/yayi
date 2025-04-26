@@ -1,0 +1,239 @@
+/* 全局样式 */
+:root {
+    --primary-color: #4e73df;
+    --secondary-color: #6c757d;
+    --success-color: #1cc88a;
+    --info-color: #36b9cc;
+    --warning-color: #f6c23e;
+    --danger-color: #e74a3b;
+    --light-color: #f8f9fc;
+    --dark-color: #5a5c69;
+    --body-bg: #f8f9fc;
+    --font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--body-bg);
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* 导航栏样式 */
+.navbar {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+}
+
+.navbar-brand img {
+    max-height: 40px;
+}
+
+/* 按钮样式 */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #3a5ec1;
+    border-color: #3a5ec1;
+}
+
+/* 卡片样式 */
+.card {
+    border-radius: 0.35rem;
+    border: none;
+    box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 2rem 0 rgba(58,59,69,.2);
+}
+
+/* 表单样式 */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
+}
+
+/* 页脚样式 */
+footer {
+    background-color: var(--light-color);
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #3a5ec1;
+    text-decoration: underline;
+}
+
+/* 仪表盘样式 */
+.dashboard-card {
+    border-left: 4px solid var(--primary-color);
+    border-radius: 0.35rem;
+}
+
+.dashboard-card.success {
+    border-left-color: var(--success-color);
+}
+
+.dashboard-card.info {
+    border-left-color: var(--info-color);
+}
+
+.dashboard-card.warning {
+    border-left-color: var(--warning-color);
+}
+
+.dashboard-card.danger {
+    border-left-color: var(--danger-color);
+}
+
+/* 聊天界面样式 */
+.chat-container {
+    height: 500px;
+    overflow-y: auto;
+    padding: 1rem;
+    background-color: #f8f9fc;
+    border-radius: 0.35rem;
+    border: 1px solid rgba(0,0,0,.1);
+}
+
+.chat-message {
+    margin-bottom: 1rem;
+    max-width: 80%;
+}
+
+.chat-message.self {
+    margin-left: auto;
+    background-color: #d4e6ff;
+    border-radius: 1rem 1rem 0 1rem;
+    padding: 0.75rem;
+}
+
+.chat-message.other {
+    margin-right: auto;
+    background-color: #f1f1f1;
+    border-radius: 1rem 1rem 1rem 0;
+    padding: 0.75rem;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .card-deck .card {
+        margin-bottom: 15px;
+    }
+}
+
+/* 动画效果 */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* 登录注册页面 */
+.auth-container {
+    max-width: 450px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
+}
+
+.auth-logo {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* 地图容器 */
+.map-container {
+    height: 500px;
+    border-radius: 0.35rem;
+    overflow: hidden;
+    box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
+}
+
+/* 标签样式 */
+.badge-consultant-fulltime {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-consultant-parttime {
+    background-color: #17a2b8;
+    color: white;
+}
+
+/* 知识库文章 */
+.knowledge-article {
+    background-color: white;
+    border-radius: 0.35rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
+}
+
+.knowledge-article h1, 
+.knowledge-article h2, 
+.knowledge-article h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.knowledge-article img {
+    max-width: 100%;
+    border-radius: 0.35rem;
+    margin: 1rem 0;
+}
+
+/* 客户档案 */
+.client-profile-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 2rem;
+    border-radius: 0.35rem 0.35rem 0 0;
+}
+
+.client-profile-body {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0 0 0.35rem 0.35rem;
+    box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
+}
+
+/* 加载动画 */
+.spinner {
+    width: 40px;
+    height: 40px;
+    margin: 100px auto;
+    background-color: var(--primary-color);
+    border-radius: 100%;  
+    animation: scaleout 1.0s infinite ease-in-out;
+}
+
+@keyframes scaleout {
+    0% { 
+        transform: scale(0);
+    } 100% {
+        transform: scale(1.0);
+        opacity: 0;
+    }
+} 
